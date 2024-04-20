@@ -1,7 +1,22 @@
 import styles from "./CityList.module.css";
+import PropTypes from "prop-types";
+import CityItem from "./CityItem";
+import Spinner from "./Spinner";
 
-function CityList() {
-  return <ul className={styles.cityList}>LIST</ul>;
+CityList.propTypes = {
+  cities: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
+
+function CityList({ cities, isLoading }) {
+  if (isLoading) return <Spinner />;
+  return (
+    <ul className={styles.cityList}>
+      {cities.map((city) => (
+        <CityItem city={city} key={city.id} />
+      ))}
+    </ul>
+  );
 }
 
 export default CityList;
