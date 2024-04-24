@@ -5,6 +5,7 @@ import styles from "./Form.module.css";
 import Button from "./Button";
 import BackButton from "./BackButton";
 import Message from "./Message";
+import Spinner from "./Spinner";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 
 export function convertToEmoji(countryCode) {
@@ -29,6 +30,7 @@ function Form() {
 
   useEffect(
     function () {
+      if (!lat && !lng) return;
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
@@ -55,6 +57,8 @@ function Form() {
     },
     [lat, lng]
   );
+  if (isLoadingGeocoding) return <Spinner />;
+  if (!lat && !lng) return <Message message={"Select a city on the map"} />;
 
   if (geoError) return <Message message={geoError} />;
 
