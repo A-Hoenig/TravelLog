@@ -14,8 +14,6 @@ function City() {
   const [searchParams, setSearchParams] = useSearchParams();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
-  console.log(setSearchParams);
-  console.log(id);
 
   // TEMP DATA
   const currentCity = {
